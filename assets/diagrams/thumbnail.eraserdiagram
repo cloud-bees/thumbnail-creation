@@ -1,0 +1,17 @@
+cloud-architecture-diagram
+
+direction right
+
+Region 1 [icon: flag, label: Region] {
+  //   Amazon Simple Storage Service (Amazon S3) [icon: aws-s3]
+  New image [icon: image]
+  Origin bucket [icon: aws-s3]
+  Lambda [icon: aws-lambda]
+  Thummbnail bucket [icon: aws-s3]
+  DynamoDB [icon: aws-dynamodb]
+}
+
+New image > Origin bucket: upload
+Origin bucket > Lambda: trigger
+Lambda > Thummbnail bucket: push thumbnail
+Lambda > DynamoDB: push metadata

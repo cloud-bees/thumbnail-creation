@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+  "name": "Python 3",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    "args": {
+      "CONDA_INSTALL": "/opt/miniconda3"
+    }
+  },
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "scripts/devcontainer/post-create.sh && scripts/devcontainer/conda-activate.sh",
+  "updateContentCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "${localEnv:USER:vscode}",
+  "runArgs": [
+    // "--platform",
+    // "linux/arm64",
+    "--name",
+    "python3-devcontainer",
+    "--env-file",
+    ".devcontainer/.env"
+  ]
+}

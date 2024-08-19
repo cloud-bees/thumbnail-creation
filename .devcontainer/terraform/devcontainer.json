@@ -1,0 +1,59 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+  "name": "Terraform",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    "args": {}
+  },
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "aws-cli": "latest",
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    // Installs the Terraform CLI and optionally TFLint, Terragrunt, sentinel, tfsec, terraform-docs.
+    // https://github.com/devcontainers/features/blob/main/src/terraform/README.md#options
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest",
+      "tflint": "latest",
+      "terragrunt": "latest",
+      "installSentinel": true,
+      "installTFsec": true,
+      "installTerraformDocs": true
+      // "httpProxy": "http://proxy:8080",
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.9"
+    },
+    "ghcr.io/devcontainers-contrib/features/infracost:1": {},
+    "ghcr.io/devcontainers-contrib/features/terrascan:1": {
+      "version": "1.19.1"
+    },
+    // "ghcr.io/flexwie/devcontainer-features/terraspace:1": {}
+    // "ghcr.io/devcontainers-contrib/features/terraformer:1": {},
+    // "ghcr.io/devcontainers-contrib/features/terracognita:1": {},
+    // "ghcr.io/devcontainers-contrib/features/k2tf:1": {},
+    // "ghcr.io/devcontainers-contrib/features/terramate:1": {},
+    // "ghcr.io/devcontainers-contrib/features/tfswitch:1": {},
+    // "ghcr.io/mickeahlinder/devcontainer-features/tfenv:1": {},
+    // "ghcr.io/joshuanianji/devcontainer-features/terraform-cli-persistence:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "dockerDashComposeVersion": "none",
+      "installDockerBuildx": false
+    },
+    "ghcr.io/customink/codespaces-features/sam-cli:1": {}
+    // "ghcr.io/audacioustux/devcontainers/aws-sam-cli:1": {},
+    // "ghcr.io/goldsam/dev-container-features/aws-sam-cli:1": {}
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "scripts/devcontainer/post-create.sh",
+  "remoteUser": "${localEnv:USER:vscode}",
+  "updateContentCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  "runArgs": [
+    "--name",
+    "terraform-devcontainer",
+    "--env-file",
+    ".devcontainer/.env"
+  ]
+}

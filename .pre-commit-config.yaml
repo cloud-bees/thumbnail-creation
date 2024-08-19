@@ -1,0 +1,119 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+        args: ["--unsafe"]
+      - id: trailing-whitespace
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.19.1
+    hooks:
+      - id: gitlint
+        description: Check if your commit messages meet the conventional commit format
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.1
+    hooks:
+      - id: gitleaks
+        description: Detecting and preventing hardcoded secrets like passwords, api keys, and tokens in git repos
+  - repo: https://github.com/trufflesecurity/truffleHog
+    rev: v3.81.9
+    hooks:
+      - id: trufflehog
+        entry: bash -c 'trufflehog git file://. --since-commit HEAD --only-verified --fail'
+        description: Find, verify, and analyze leaked credentials
+        # For running trufflehog in docker, use the following entry instead:
+        # entry: bash -c 'docker run --rm -v "$(pwd):/workdir" -i --rm trufflesecurity/trufflehog:latest git file:///workdir --since-commit HEAD --only-verified --fail'
+        # language: system
+        # stages: ["commit", "push"]
+  - repo: https://github.com/thoughtworks/talisman
+    rev: v1.28.0
+    hooks:
+      # both pre-commit and pre-push supported
+      # -   id: talisman-push
+      - id: talisman-commit
+        entry: cmd --githook pre-commit
+        description: Validates the outgoing changeset for things that
+          look suspicious - such as SSH keys, tokens, private keys etc.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.1
+    hooks:
+      # Run the linter.
+      - id: ruff
+        description: Python linter and code formatter
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint
+        description: Dockerfile linter
+        args: [
+          '--ignore', 'DL3007', # Using latest
+          '--ignore', 'DL3013', # Pin versions in pip
+          '--ignore', 'DL3027', # Do not use apt
+          '--ignore', 'DL3059', # Docker `RUN`s shouldn't be consolidated here
+          '--ignore', 'DL4006', # Not related to alpine
+          '--ignore', 'SC1091', # Useless check
+          '--ignore', 'SC2015', # Useless check
+          '--ignore', 'SC3037', # Not related to alpine
+        ]
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.13.0
+    hooks:
+    - id: markdownlint-cli2
+      args: ["--fix"]
+  # REQUIRES: terraform to be installed and on the $PATH
+  - repo: local
+    hooks:
+    - id: terraform-fmt
+      name: Terraform format
+      language: system
+      entry: terraform fmt -check=true -recursive
+      pass_filenames: false
+      types: [terraform]
+    - id: terraform-validate
+      name: Terraform validate
+      description: Validates all Terraform configuration files.
+      pass_filenames: false
+      entry: terraform validate
+      language: system
+      types: [terraform]
+    - id: terraform-docs
+      name: Terraform docs
+      description: Generate and update documentation for Terraform modules in Markdown format.
+      pass_filenames: false
+      entry: zsh -c 'terraform-docs markdown $TF_WORKING_DIR --output-file $ROOT_DIR/docs/terraform.md'
+      language: system
+      types: [terraform]
+    - id: terraform-tflint
+      name: Terraform tflint
+      description: Run tflint to validate all Terraform configuration files.
+      language: system
+      pass_filenames: false
+      entry: tflint --recursive
+    - id: trivy
+      name: Trivy
+      description: Scan Terraform, Dockerfile, and Kubernetes,...
+        files for vulnerabilities, misconfigurations, secrets, licenses.
+      language: system
+      pass_filenames: false
+      # Will change CRITICAL to MEDIUM and HIGH
+      entry: trivy fs --severity CRITICAL --scanners secret,misconfig ./ -o trivy-report.log --exit-code 1
+
+    # - id: terrascan
+    #   name: Terrascan
+    #   description: Detect compliance and security violations across Infrastructure as Code
+    #   language: system
+    #   pass_filenames: false
+    #   entry: terrascan scan -i terraform -d terraform/environments/dev --severity High --log-output-dir terrascan-reports
+    # - id: checkov
+    #   name: Checkov
+    #   description: Run Checkov to validate all Terraform configuration files.
+    #   language: system
+    #   pass_filenames: false
+    #   entry: checkov -d .
+  # - repo: https://github.com/antonbabenko/pre-commit-terraform
+  #   rev: v1.88.0
+  #   hooks:
+  #     - id: terraform_fmt
