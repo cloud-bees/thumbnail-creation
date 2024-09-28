@@ -5,13 +5,11 @@
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".",
-    "args": {
-      "CONDA_INSTALL": "/opt/miniconda3"
-    }
+    "args": {}
   },
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
+    "ghcr.io/devcontainers/features/common-utils:2.5.1": {
       "configureZshAsDefaultShell": true
     }
   },

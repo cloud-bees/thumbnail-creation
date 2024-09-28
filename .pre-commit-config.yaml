@@ -43,11 +43,14 @@ repos:
         args: [ --fix ]
       # Run the formatter.
       - id: ruff-format
-  - repo: https://github.com/hadolint/hadolint
-    rev: v2.12.0
+  - repo: local
     hooks:
-      - id: hadolint
-        description: Dockerfile linter
+      - id: hadolint-docker
+        name: Lint Dockerfiles
+        description: Runs hadolint Docker image to lint Dockerfiles
+        language: docker_image
+        types: ["dockerfile"]
+        entry: ghcr.io/hadolint/hadolint hadolint
         args: [
           '--ignore', 'DL3007', # Using latest
           '--ignore', 'DL3013', # Pin versions in pip

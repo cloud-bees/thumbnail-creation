@@ -1,13 +1,12 @@
 #!/bin/zsh
 
 cat <<EOF >> ~/.zshrc
-reset_color='\e[0m'
 
 git() {
   if [[ \$# -ge 1 && "\$1" == "status" ]]; then
     echo "========= Run git stash list ========="
     var=\$(git stash list 2>&1)
-    echo -e "\033[35m \$var \$reset_color"
+    echo -e "\033[35m \$var \e[0m"
     echo "========= End git stash list ========="
     command git status
   else
@@ -40,5 +39,6 @@ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/inst
 pip install pre-commit
 pre-commit install --hook-type commit-msg
 
-# Terraform autocomplete
-terraform -install-autocomplete
+if [ -x "$(command -v terraform --version)" ]; then
+  terraform -install-autocomplete
+fi
