@@ -1,0 +1,32 @@
+name: Pre-commit Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Load env file
+        uses: xom9ikk/dotenv@v2.3.0
+        with:
+          path: .devcontainer
+          load-mode: strict
+
+      # Install Python (pre-commit requires Python)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files

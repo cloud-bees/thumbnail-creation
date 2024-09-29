@@ -37,7 +37,7 @@ curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/inst
 
 # Setup pre-commit
 pip install pre-commit
-pre-commit install --hook-type commit-msg
+pre-commit install --install-hooks
 
 if [ -x "$(command -v terraform --version)" ]; then
   terraform -install-autocomplete

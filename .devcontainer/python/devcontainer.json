@@ -11,6 +11,10 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2.5.1": {
       "configureZshAsDefaultShell": true
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2.12.0": {
+      "dockerDashComposeVersion": "none",
+      "installDockerBuildx": false
     }
   },
   // Use 'postCreateCommand' to run commands after the container is created.

@@ -14,7 +14,7 @@ from images uploaded to an AWS S3 bucket using AWS Lambda and Terraform.
     - [Usage](#usage)
     - [Clean Up Resources](#clean-up-resources)
     - [Folder Structure](#folder-structure)
-  - [Workflows](#workflows)
+  - [Architecture Diagram](#architecture-diagram)
   - [Testing Lambda Locally](#testing-lambda-locally)
   - [Troubleshooting](#troubleshooting)
   - [Contributing](#contributing)
@@ -73,7 +73,7 @@ Here is an overview of the folder structure: [Read here](docs/folder-structure.m
 
 Feel free to explore each folder to understand the purpose and contents of each.
 
-## Workflows
+## Architecture Diagram
 
 The following diagram illustrates the high-level workflow of the project.
 ![alt text](assets/images/thumbnail-workflow.png)
@@ -101,7 +101,7 @@ Information about contributing to this project can be found in the [CONTRIBUTING
 - Terraform vault
 - Sphinx
 - Use Terraform VCS
-- CI/CD pipeline IN Github action, CodePipeline
+- CI/CD pipeline IN CodePipeline
 - Auto release
 - Video instruction
 - [infracost](https://github.com/infracost/infracost)
