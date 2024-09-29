@@ -1,0 +1,30 @@
+name: Daily DevContainer Check
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs every day at midnight (UTC)
+
+  # You can also trigger this workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install DevContainer CLI
+        run: |
+          npm install -g @devcontainers/cli
+
+      - name: Build and Test DevContainer
+        run: |
+          devcontainer build .
+          devcontainer up --workspace-folder .
+
+      # Optional - Run a simple command inside the container to verify
+      - name: Verify DevContainer Functionality
+        run: |
+          devcontainer exec --workspace-folder . echo "DevContainer is working!"

@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable no-duplicate-heading -->
+## [Unreleased]
+
+### Added
+
+- Github Action
+
+### Fixed
+
+- pre-commit install-hooks not installing Hadolint binary [#886](https://github.com/hadolint/hadolint/issues/886)
+- The latest Devcontainer feature is not compatible [#4](https://github.com/cloud-bees/thumbnail-creation/issues/4)
+
+### Changed
+
+- Dockerfile to use multi-stage builds for installing Miniconda3
+- Enable Dependabot in Repository setting
+- README subtitle: Architecture Diagram instead workflow
 
 ## [v1.0.0] - 2024-09-07
 
