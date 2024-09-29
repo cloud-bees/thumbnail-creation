@@ -4,6 +4,7 @@ This project is designed to generate thumbnails and upload the data information 
 from images uploaded to an AWS S3 bucket using AWS Lambda and Terraform.
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![GitHub CI](https://github.com/cloud-bees/thumbnail-creation/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/cloud-bees/thumbnail-creation/actions/workflows/pre-commit.yaml)
 
 ## Table of Contents
 
@@ -20,7 +21,6 @@ from images uploaded to an AWS S3 bucket using AWS Lambda and Terraform.
   - [Contributing](#contributing)
   - [Changelog](#changelog)
     - [Version History](#version-history)
-    - [Roadmap](#roadmap)
   - [Summary](#summary)
   - [References](#references)
   - [License](#license)
@@ -95,21 +95,6 @@ Information about contributing to this project can be found in the [CONTRIBUTING
 ## Changelog
 
 ### [Version History](docs/CHANGELOG.md)
-
-### Roadmap
-
-- Terraform vault
-- Sphinx
-- Use Terraform VCS
-- CI/CD pipeline IN CodePipeline
-- Auto release
-- Video instruction
-- [infracost](https://github.com/infracost/infracost)
-- [Hashicorp Sentinel](https://developer.hashicorp.com/sentinel/intro)
-- terragrunt a flexible orchestration tool that allows Infrastructure as Code written in OpenTofu/Terraform to scale.
-- [checkov](https://github.com/bridgecrewio/checkov/blob/main/README.md)
-- terrascan
-- tfupdate
 
 ## Summary
 
