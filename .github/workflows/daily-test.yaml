@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  python-devcontainer:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,12 +19,31 @@ jobs:
         run: |
           npm install -g @devcontainers/cli
 
-      - name: Build and Test DevContainer
+      - name: Spin up Python DevContainer
         run: |
-          devcontainer build .
-          devcontainer up --workspace-folder .
+          devcontainer up --workspace-folder . --config .devcontainer/python/devcontainer.json
 
       # Optional - Run a simple command inside the container to verify
       - name: Verify DevContainer Functionality
         run: |
-          devcontainer exec --workspace-folder . echo "DevContainer is working!"
+          devcontainer exec --workspace-folder . --config .devcontainer/python/devcontainer.json python --version
+
+  terraform-devcontainer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install DevContainer CLI
+        run: |
+          npm install -g @devcontainers/cli
+
+      - name: Spin up Terraform DevContainer
+        run: |
+          devcontainer up --workspace-folder . --config .devcontainer/terraform/devcontainer.json
+
+      # Optional - Run a simple command inside the container to verify
+      - name: Verify DevContainer Functionality
+        run: |
+          devcontainer exec --workspace-folder . --config .devcontainer/terraform/devcontainer.json terraform --version
