@@ -45,7 +45,7 @@
       "dockerDashComposeVersion": "none",
       "installDockerBuildx": false
     },
-    "ghcr.io/customink/codespaces-features/sam-cli:1.0.1": {
+    "ghcr.io/customink/codespaces-features/sam-cli:1.2.0": {
       "version": "1.123.0"
     }
   },
