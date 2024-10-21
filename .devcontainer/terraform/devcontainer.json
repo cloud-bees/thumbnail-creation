@@ -12,7 +12,7 @@
   "features": {
     // Version of devcontainer features to use https://github.com/orgs/devcontainers/packages?repo_name=features
     "ghcr.io/devcontainers/features/aws-cli:1.1": {},
-    "ghcr.io/devcontainers/features/common-utils:2.5.1": {},
+    "ghcr.io/devcontainers/features/common-utils:2.5.2": {},
     // Installs the Terraform CLI and optionally TFLint, Terragrunt, sentinel, tfsec, terraform-docs.
     // https://github.com/devcontainers/features/blob/main/src/terraform/README.md#options
     "ghcr.io/devcontainers/features/terraform:1.3.8": {
